@@ -1,0 +1,165 @@
+<html>
+<head>
+	<title>weather api</title>
+	<style>
+		body
+		{
+			background-image: url("background.jpg");
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+		h1,h3
+		{
+			
+			text-align: center;
+			color:yellow;
+		}
+		h1{
+			margin-top: 10%;
+		}
+		#printresult
+		{
+			display: none;
+			margin-top: 10%;
+			margin-left: 40%;
+		}
+		table
+		{
+			border: 2px solid;
+ 			 width: 50%;
+ 			 text-align: center;
+			padding: 20px;
+			 border-color: rgb(168, 82, 20);
+			 color:springgreen;
+			 font-size:25px;
+			 font-weight: 300;
+			 
+
+		}
+		td
+		{
+			padding: 30px;
+		}
+		tr:nth-child(even) 
+		{
+			background-color:lightgoldenrodyellow;
+			color:blue;
+		}
+		button {
+  			background-color:green; 
+ 			 border: none;
+  			color:black;
+  			text-align: center;
+ 			 text-decoration: none;
+ 			 display: inline-block;
+ 			 font-size: 20px;
+			 font-family: 'Times New Roman', Times, serif;
+ 			 margin: 4px 2px;
+  				cursor: pointer;
+				padding: 12px 20px;
+			  border-radius: 12px;
+			  margin-left: 2%;
+			}
+			#city
+			{
+				background-color: lightgoldenrodyellow;
+  					width: 40%;
+  					padding: 12px 20px;
+					  margin: 8px 0;
+ 					 display: inline-block;
+ 				 border: 1px solid #ccc;
+  					border-radius: 4px;
+  					box-sizing: border-box;
+					  margin-left: 30%;
+					  color:blueviolet;
+					  font-weight: bold;
+					  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+					  font-size: 20px;
+			}
+			button:hover
+			{
+				background-color: coral;
+			}
+			footer
+			{
+				text-align: center;
+				color:lawngreen;
+				font-size: 20px;
+				margin-left: 50%;
+			}
+			a,h5{
+				text-decoration: none;
+				font-size: 20px;
+				color:springgreen;
+
+			}
+	</style>
+	</head>
+<body>
+	
+	<h1>Weather Report Stats</h1>
+	<h3>Please type your city below to get your weather report</h3>
+
+	<input type="textbox" id="city" placeholder="Enter your city/country/region">
+	<button  onclick="weather();">Get</button>
+	<p id="printdata"></p>
+	<div id="printresult" style='display:hidden;'>
+		
+	</div>
+	<footer>
+		<h4>Developed By: ASHOKKUMAR PUDHURAJA</h4>
+		<a href="mailto:ashokkumar09082001@gmail.com"><h5>Send feedback</h5></a>
+	</footer>
+
+<script>
+
+
+function weather()
+{
+	 const city=document.getElementById('city').value;
+	 console.log(city);
+	 const ul = document.getElementById('printdata');
+	const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '5c9838b38emshad701a6a6105000p150f23jsn152ec90ecd4b',
+		'X-RapidAPI-Host': 'community-open-weather-map.p.rapidapi.com'
+	}
+};
+
+var value='https://community-open-weather-map.p.rapidapi.com/weather?q='+city;
+ fetch(value,options)
+    .then((response) => 
+       response.json())
+    .then((data) =>
+	{
+    document.getElementById('printresult').style.display="block";
+    let var1="<table>";
+	var1+="<tr><td>Temperature</td><td>"+Math.round(data.main.temp -273.15)+"°C"+"</td></tr>";
+	var1 +="<tr><td>Latitude</td><td>"+data.coord.lat+"</td></tr>";
+	var1 +="<tr><td>Logitude</td><td>"+data.coord.lon+"</td></tr>";
+	var1+="<tr><td>Weather</td><td>"+data.weather[0].description+"</td></tr>";
+	var1+="<tr><td>Min Temperature</td><td>"+Math.round(data.main.temp_max-273.15)+"°C"+"</td></tr>";
+	var1+="<tr><td>Max Temperature</td><td>"+Math.round(data.main.temp_min-273.15)+"°C"+"</td></tr>";
+	var1+="<tr><td>Wind Speed</td><td>"+data.wind.speed+"</td></tr>";
+	var1+="<tr><td>Clouds</td><td>"+data.clouds.all+"</td></tr>";
+	var1+="<tr><td>SunRise</td><td>"+data.sys.sunrise+"</td></tr>";
+	var1+="<tr><td>SunSet</td><td>"+data.sys.sunset+"</td></tr>";
+	var1+="<tr><td>Time Zone</td><td>"+data.timezone+"</td></tr>";
+	var1+="<tr><td>Place</td><td>"+data.name+"</td></tr>";
+	var1+="<tr><td>Country</td><td>"+data.sys.country+"</td></tr></table>";
+
+	document.getElementById('printresult').innerHTML=var1;
+	
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
+}
+
+
+</script>
+
+</body>
+</html>
