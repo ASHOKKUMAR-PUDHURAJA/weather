@@ -137,7 +137,7 @@ var value='https://community-open-weather-map.p.rapidapi.com/weather?q='+city;
     let var1="<table>";
 	var1+="<tr><td>Temperature</td><td>"+Math.round(data.main.temp -273.15)+"°C"+"</td></tr>";
 	var1 +="<tr><td>Latitude</td><td>"+data.coord.lat+"</td></tr>";
-	var1 +="<tr><td>Logitude</td><td>"+data.coord.lon+"</td></tr>";
+	var1 +="<tr><td>Longitude</td><td>"+data.coord.lon+"</td></tr>";
 	var1+="<tr><td>Weather</td><td>"+data.weather[0].description+"</td></tr>";
 	var1+="<tr><td>Min Temperature</td><td>"+Math.round(data.main.temp_max-273.15)+"°C"+"</td></tr>";
 	var1+="<tr><td>Max Temperature</td><td>"+Math.round(data.main.temp_min-273.15)+"°C"+"</td></tr>";
