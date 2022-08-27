@@ -123,11 +123,11 @@ function weather()
 	method: 'GET',
 	headers: {
 		'X-RapidAPI-Key': '5c9838b38emshad701a6a6105000p150f23jsn152ec90ecd4b',
-		'X-RapidAPI-Host': 'community-open-weather-map.p.rapidapi.com'
+    'X-RapidAPI-Host': 'open-weather13.p.rapidapi.com'
 	}
 };
 
-var value='https://community-open-weather-map.p.rapidapi.com/weather?q='+city;
+var value='https://open-weather13.p.rapidapi.com/city/'+city;
  fetch(value,options)
     .then((response) => 
        response.json())
@@ -135,12 +135,12 @@ var value='https://community-open-weather-map.p.rapidapi.com/weather?q='+city;
 	{
     document.getElementById('printresult').style.display="block";
     let var1="<table>";
-	var1+="<tr><td>Temperature</td><td>"+Math.round(data.main.temp -273.15)+"°C"+"</td></tr>";
+	var1+="<tr><td>Temperature</td><td>"+Math.round((data.main.temp -32)*(5/9))+"°C"+"</td></tr>";
 	var1 +="<tr><td>Latitude</td><td>"+data.coord.lat+"</td></tr>";
 	var1 +="<tr><td>Longitude</td><td>"+data.coord.lon+"</td></tr>";
 	var1+="<tr><td>Weather</td><td>"+data.weather[0].description+"</td></tr>";
-	var1+="<tr><td>Min Temperature</td><td>"+Math.round(data.main.temp_max-273.15)+"°C"+"</td></tr>";
-	var1+="<tr><td>Max Temperature</td><td>"+Math.round(data.main.temp_min-273.15)+"°C"+"</td></tr>";
+	var1+="<tr><td>Min Temperature</td><td>"+Math.round((data.main.temp_max-32)*5/9)+"°C"+"</td></tr>";
+	var1+="<tr><td>Max Temperature</td><td>"+Math.round((data.main.temp_min-32)*5/9)+"°C"+"</td></tr>";
 	var1+="<tr><td>Wind Speed</td><td>"+data.wind.speed+"</td></tr>";
 	var1+="<tr><td>Clouds</td><td>"+data.clouds.all+"</td></tr>";
 	var1+="<tr><td>SunRise</td><td>"+data.sys.sunrise+"</td></tr>";
